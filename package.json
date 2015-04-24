@@ -1,0 +1,25 @@
+{
+  "name": "js-path",
+  "version": "1.0.0",
+  "description": "Parse and check javascript objects",
+  "main": "index.js",
+  "scripts": {
+    "uglify" : "uglifyjs --compress --mangle --screw-ie8 -- index.js > dist/traverse.min.js",
+    "test": "mocha"
+  },
+  "keywords": [
+    "object",
+    "path",
+    "object path",
+    "traverse"
+  ],
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/wmira/object-path.git"
+  },
+  "author": "Warren Mira warrenmira@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^2.2.4"
+  }
+}

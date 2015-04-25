@@ -1,6 +1,7 @@
 #object-traverse
 ==============
 [![Build Status](https://travis-ci.org/wmira/object-traverse.svg?branch=master)](https://travis-ci.org/wmira/object-traverse)
+[![view on npm](http://img.shields.io/npm/v/object-traverse.svg)](https://www.npmjs.org/package/object-traverse)
 
 A very simple utility on traversing object graphs using a string.
 

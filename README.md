@@ -7,7 +7,7 @@ A very simple utility on traversing object graphs using a string.
 ## How to use
 
 ```
-   npm install --save-dev js-path
+   npm install --save-dev object-traverse
    
 ```
 

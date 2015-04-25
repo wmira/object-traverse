@@ -1,0 +1,30 @@
+{
+  "name": "object-traverse",
+  "main": "index.js",
+  "version": "1.0.1",
+  "homepage": "https://github.com/wmira/object-traverse",
+  "authors": [
+    "Warren Mira <warrenmira@gmail.com>"
+  ],
+  "description": "Parse , check and traverse javascript objects via string path",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "object",
+    "deep",
+    "bean",
+    "path",
+    "traverse"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

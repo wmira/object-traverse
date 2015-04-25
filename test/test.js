@@ -94,7 +94,6 @@ describe('object-path tests', function(){
         assert.equal(traverse(objMod).get('subField/newPath/y'),'y');
     });
 
-
     var objFunc = {
         field: function(a) {
             return 1 + a;
@@ -108,13 +107,29 @@ describe('object-path tests', function(){
             }
         },
         notAFunc: 5,
-        notAFunc2 : { x : 'x' }
+        notAFunc2 : { x : 'x' },
+        noArg : {  noArg: function() {return 'noarg'} }
     };
     it('should properly execute functions', function() {
         assert.equal(traverse(objFunc).exec('field',1),2);
+        assert.equal(traverse(objFunc).exec('noArg/noArg'),'noarg');
         assert.equal(traverse(objFunc).exec('deep/field',1),6);
         assert.equal(traverse(objFunc).exec('deep/fieldThis',1),6);
         assert.equal(traverse(objFunc).exec('notAFunc'),undefined);
         assert.equal(traverse(objFunc).exec('notAFunc2/x'),undefined);
     });
+
+    var deleteObj = {
+        x : 'y',
+        nested: { x : 'y'}
+    };
+    it ( 'should properly delete path' , function() {
+        assert.equal(traverse(deleteObj).delete('x'));
+        assert.equal(traverse(deleteObj).get('x'),undefined);
+        assert.equal(traverse(deleteObj).get('nested/x'),'y');
+        assert.equal(traverse(deleteObj).delete('nested/x'));
+        assert.equal(traverse(deleteObj).get('nested/x'),undefined);
+    });
+
+
 });

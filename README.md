@@ -10,6 +10,8 @@ A very simple utility on traversing object graphs using a string.
    
 ```
 
+If using via normal javascript include, then it is exported as window.objectTraverse.
+
 ## API
 
 ```javascript
@@ -39,6 +41,11 @@ traverse(graph).isObject('field2');
 traverse(graph).isNumber('field2');
           
 #exec
-traverse(graph).exec('deepFunc/someFunc','arg');          
+traverse(graph).exec('deepFunc/someFunc','arg');         
+
+#delete
+traverse(graph).delete('field/deep/x');
+ 
 ```
+
 

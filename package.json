@@ -1,21 +1,22 @@
 {
-  "name": "js-path",
-  "version": "1.0.0",
-  "description": "Parse and check javascript objects",
+  "name": "object-traverse",
+  "version": "1.0.1",
+  "description": "Parse , check and traverse javascript objects via string path",
   "main": "index.js",
   "scripts": {
     "uglify" : "uglifyjs --compress --mangle --screw-ie8 -- index.js > dist/traverse.min.js",
-    "test": "mocha"
+    "test": "node_modules/mocha/bin/mocha"
   },
   "keywords": [
     "object",
+    "deep",
+    "bean",
     "path",
-    "object path",
     "traverse"
   ],
   "repository" : {
     "type" : "git",
-    "url" : "https://github.com/wmira/object-path.git"
+    "url" : "https://github.com/wmira/object-traverse.git"
   },
   "author": "Warren Mira warrenmira@gmail.com",
   "license": "MIT",

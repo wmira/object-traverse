@@ -3,7 +3,7 @@
 var assert = require("assert");
 var traverse = require('../index');
 
-describe('object-path tests', function(){
+describe('object traverse tests', function(){
 
     var obj = {
         sample : {

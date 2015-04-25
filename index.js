@@ -73,6 +73,15 @@
                 return defaultVal;
             },
 
+            /**
+             * Helper method to check if the path exists
+             *
+             * @returns {boolean}
+             */
+            has: function(path) {
+                return traverse(obj,path) !== undefined;
+            },
+
             set: function (path, val) {
                 //we will retrieve only up to the last path
                 var traversedAlmost = traverseAlmost(obj,path);

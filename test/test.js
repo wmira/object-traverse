@@ -34,6 +34,9 @@ describe('object traverse tests', function(){
         assert.notStrictEqual(traverse(obj).get('subField'),{field: 2});
         assert.equal(traverse(obj).get('a/b/c'),undefined);
         assert.equal(traverse(obj).get('a/lo/ha','ALOHA'),'ALOHA');
+
+        assert.equal(traverse(obj).has('x/b/c'),false);
+        assert.equal(traverse(obj).has('sample/another'),true);
     });
 
 

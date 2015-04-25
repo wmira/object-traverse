@@ -32,6 +32,9 @@ var graph = {
 #get a value
 traverse(graph).get('field/deep');
 
+#check if something is defined
+traverse(graph).has('field/deep/missing');
+
 #sets a value
 traverse(graph).get('field/deep/z',5);
    

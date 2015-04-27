@@ -1,6 +1,6 @@
 {
   "name": "object-traverse",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Parse , check and traverse javascript objects via string path",
   "main": "index.js",
   "scripts": {

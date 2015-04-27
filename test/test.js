@@ -29,48 +29,48 @@ describe('object traverse tests', function(){
 
     it('should return object properly', function(){
 
-        assert.notStrictEqual(traverse(obj).get('sample/andAnother/anObject'),{});
-        assert.equal(traverse(obj).get('subField/field'),2);
+        assert.notStrictEqual(traverse(obj).get('sample.andAnother.anObject'),{});
+        assert.equal(traverse(obj).get('subField.field'),2);
         assert.notStrictEqual(traverse(obj).get('subField'),{field: 2});
-        assert.equal(traverse(obj).get('a/b/c'),undefined);
-        assert.equal(traverse(obj).get('a/lo/ha','ALOHA'),'ALOHA');
+        assert.equal(traverse(obj).get('a.b.c'),undefined);
+        assert.equal(traverse(obj).get('a.lo.ha','ALOHA'),'ALOHA');
 
-        assert.equal(traverse(obj).has('x/b/c'),false);
-        assert.equal(traverse(obj).has('sample/another'),true);
+        assert.equal(traverse(obj).has('x.b.c'),false);
+        assert.equal(traverse(obj).has('sample.another'),true);
     });
 
 
 
     it('should properly check strings', function(){
-        assert.equal(traverse(obj).isString('sub/field'),true);
-        assert.equal(traverse(obj).isString('sub/empty'),true);
-        assert.equal(traverse(obj).isString('sub/a'),false);
+        assert.equal(traverse(obj).isString('sub.field'),true);
+        assert.equal(traverse(obj).isString('sub.empty'),true);
+        assert.equal(traverse(obj).isString('sub.a'),false);
         assert.equal(traverse(obj).isString('x'),false);
     });
 
     it('should properly check array', function(){
-        assert.equal(traverse(obj).isArray('sub/field'),false);
-        assert.equal(traverse(obj).isArray('sub/empty'),false);
-        assert.equal(traverse(obj).isArray('sample/another/anArray'),true);
-        assert.equal(traverse(obj).isArray('sample/andAnother/anObject'),false);
-        assert.equal(traverse(obj).isArray('xy/z'),false);
+        assert.equal(traverse(obj).isArray('sub.field'),false);
+        assert.equal(traverse(obj).isArray('sub.empty'),false);
+        assert.equal(traverse(obj).isArray('sample.another.anArray'),true);
+        assert.equal(traverse(obj).isArray('sample.andAnother.anObject'),false);
+        assert.equal(traverse(obj).isArray('xy.z'),false);
     });
 
 
     it('should properly check obj', function(){
-        assert.equal(traverse(obj).isObject('sub/field'),false);
-        assert.equal(traverse(obj).isObject('sub/empty'),false);
-        assert.equal(traverse(obj).isObject('sample/another/anArray'),true);
-        assert.equal(traverse(obj).isObject('sample/andAnother/anObject'),true);
-        assert.equal(traverse(obj).isObject('xy/z'),false);
+        assert.equal(traverse(obj).isObject('sub.field'),false);
+        assert.equal(traverse(obj).isObject('sub.empty'),false);
+        assert.equal(traverse(obj).isObject('sample.another.anArray'),true);
+        assert.equal(traverse(obj).isObject('sample.andAnother.anObject'),true);
+        assert.equal(traverse(obj).isObject('xy.z'),false);
     });
 
     it('should properly check number', function(){
-        assert.equal(traverse(obj).isNumber('sub/field'),false);
-        assert.equal(traverse(obj).isNumber('sub/empty'),false);
-        assert.equal(traverse(obj).isNumber('subField/field'),true);
-        assert.equal(traverse(obj).isNumber('subField/field1'),true);
-        assert.equal(traverse(obj).isNumber('subField/field2'),true);
+        assert.equal(traverse(obj).isNumber('sub.field'),false);
+        assert.equal(traverse(obj).isNumber('sub.empty'),false);
+        assert.equal(traverse(obj).isNumber('subField.field'),true);
+        assert.equal(traverse(obj).isNumber('subField.field1'),true);
+        assert.equal(traverse(obj).isNumber('subField.field2'),true);
     });
 
     var objMod = {
@@ -89,12 +89,12 @@ describe('object traverse tests', function(){
         assert.equal(traverse(objMod).set('hey2','X'),'X');
         assert.equal(traverse(objMod).get('hey2'),'X');
 
-        assert.equal(traverse(objMod).set('subField/subField2/last',5),5);
-        assert.equal(traverse(objMod).get('subField/subField2/last'),5);
+        assert.equal(traverse(objMod).set('subField.subField2.last',5),5);
+        assert.equal(traverse(objMod).get('subField.subField2.last'),5);
 
-        assert.notStrictEqual(traverse(objMod).set('subField/newPath',{ x: 'x', y:'y'}),{ x: 'x', y:'y'} );
-        assert.equal(traverse(objMod).get('subField/newPath/x'),'x');
-        assert.equal(traverse(objMod).get('subField/newPath/y'),'y');
+        assert.notStrictEqual(traverse(objMod).set('subField.newPath',{ x: 'x', y:'y'}),{ x: 'x', y:'y'} );
+        assert.equal(traverse(objMod).get('subField.newPath.x'),'x');
+        assert.equal(traverse(objMod).get('subField.newPath.y'),'y');
     });
 
     var objFunc = {
@@ -115,11 +115,11 @@ describe('object traverse tests', function(){
     };
     it('should properly execute functions', function() {
         assert.equal(traverse(objFunc).exec('field',1),2);
-        assert.equal(traverse(objFunc).exec('noArg/noArg'),'noarg');
-        assert.equal(traverse(objFunc).exec('deep/field',1),6);
-        assert.equal(traverse(objFunc).exec('deep/fieldThis',1),6);
+        assert.equal(traverse(objFunc).exec('noArg.noArg'),'noarg');
+        assert.equal(traverse(objFunc).exec('deep.field',1),6);
+        assert.equal(traverse(objFunc).exec('deep.fieldThis',1),6);
         assert.equal(traverse(objFunc).exec('notAFunc'),undefined);
-        assert.equal(traverse(objFunc).exec('notAFunc2/x'),undefined);
+        assert.equal(traverse(objFunc).exec('notAFunc2.x'),undefined);
     });
 
     var deleteObj = {
@@ -129,9 +129,9 @@ describe('object traverse tests', function(){
     it ( 'should properly delete path' , function() {
         assert.equal(traverse(deleteObj).delete('x'));
         assert.equal(traverse(deleteObj).get('x'),undefined);
-        assert.equal(traverse(deleteObj).get('nested/x'),'y');
-        assert.equal(traverse(deleteObj).delete('nested/x'));
-        assert.equal(traverse(deleteObj).get('nested/x'),undefined);
+        assert.equal(traverse(deleteObj).get('nested.x'),'y');
+        assert.equal(traverse(deleteObj).delete('nested.x'));
+        assert.equal(traverse(deleteObj).get('nested.x'),undefined);
     });
 
 

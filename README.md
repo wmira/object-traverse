@@ -6,6 +6,9 @@
 A very simple utility on traversing object graphs using a string.
 
 ## Changelog
+v1.1.0
+* used "." instead of slash
+
 v1.0.2
 * added has which check if a path is available by checking if its undefined
 

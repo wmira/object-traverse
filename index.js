@@ -22,7 +22,7 @@
 
     var traverse = function (obj, path) {
 
-        return path.split("/").reduce(function (prev, current) {
+        return path.split(".").reduce(function (prev, current) {
             if (prev) {
                 return prev[current];
             }
@@ -38,10 +38,10 @@
      * @returns {{parent: string, child: *}}
      */
     var parseAsParentChild = function (path) {
-        var pathArr = path.split("/");
+        var pathArr = path.split(".");
         return {
             parent: pathArr.length > 1 ?
-                pathArr.splice(0, pathArr.length - 1).join('/') : '',
+                pathArr.splice(0, pathArr.length - 1).join('.') : '',
             child: pathArr.length > 0 ? pathArr[pathArr.length - 1] : ''
         }
     };

@@ -40,33 +40,33 @@ var graph = {
    deepFunc : { someFunc: function(arg) {} }
    
 };
-#get a value
+//get a value
 traverse(graph).get('field/deep');
-#get with a default
+//get with a default
 traverse(graph).get('field/deep','default return val if not found'); 
 
-#check if something is defined
+//check if something is defined
 traverse(graph).has('field/deep/missing');
 
-#sets a value
+//sets a value
 traverse(graph).set('field/deep/z',5);
    
-#helpers
+//helpers
 traverse(graph).isArray('field2');
 traverse(graph).isString('field2');
 traverse(graph).isObject('field2');
 traverse(graph).isNumber('field2');
           
-#exec
+//exec
 traverse(graph).exec('deepFunc/someFunc','arg');         
 
-#delete
+//delete
 traverse(graph).delete('field/deep/x');
 
-#push - add vall to the array, will create if it doesn't exists
+//push - add vall to the array, will create if it doesn't exists
 traverse(graph).push('a.b.c',val);
 
-#create create the given path if it doesn't exists, will skip none object types
+//create create the given path if it doesn't exists, will skip none object types
 traverse(graph).create('a.b.c');
 traverse(graph).get('a.b.c'); //{ a : { b : { c: {} } }
 ```

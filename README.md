@@ -39,12 +39,14 @@ var graph = {
 };
 #get a value
 traverse(graph).get('field/deep');
+#get with a default
+traverse(graph).get('field/deep','default return val if not found'); 
 
 #check if something is defined
 traverse(graph).has('field/deep/missing');
 
 #sets a value
-traverse(graph).get('field/deep/z',5);
+traverse(graph).set('field/deep/z',5);
    
 #helpers
 traverse(graph).isArray('field2');

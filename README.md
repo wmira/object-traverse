@@ -6,6 +6,9 @@
 A very simple utility on traversing object graphs using a string.
 
 ## Changelog
+v1.1.1
+* added create and push
+
 v1.1.0
 * used "." instead of slash
 
@@ -59,7 +62,13 @@ traverse(graph).exec('deepFunc/someFunc','arg');
 
 #delete
 traverse(graph).delete('field/deep/x');
- 
+
+#push - add vall to the array, will create if it doesn't exists
+traverse(graph).push('a.b.c',val);
+
+#create create the given path if it doesn't exists, will skip none object types
+traverse(graph).create('a.b.c');
+traverse(graph).get('a.b.c'); //{ a : { b : { c: {} } }
 ```
 
 

@@ -19,6 +19,10 @@
 
     'use strict';
 
+    //we need to exclude '' or 0, false
+    var nullOrUndefined = function(obj) {
+        return ( obj === null || obj === undefined )
+    };
 
     var traverse = function (obj, path) {
 
@@ -59,10 +63,17 @@
         }
         return undefined;
     };
+    var doNothing = function(){};
 
-
-   return function (obj) {
-
+    var noop = {
+        get: doNothing, has: doNothing, set: doNothing, push: doNothing,
+        create: doNothing, delete: doNothing, exec: doNothing, isArray: doNothing,
+        isString: doNothing, isNumber: doNothing
+    };
+    return function (obj) {
+        if ( !obj ) {
+            return noop;
+        }
         return {
             get: function (path, defaultVal) {
                 var traversed = traverse(obj, path);
@@ -82,6 +93,13 @@
                 return traverse(obj,path) !== undefined;
             },
 
+            /**
+             * Set the path's value to be val
+             *
+             * @param path
+             * @param val
+             * @returns {*}
+             */
             set: function (path, val) {
                 //we will retrieve only up to the last path
                 var traversedAlmost = traverseAlmost(obj,path);
@@ -93,13 +111,63 @@
             },
 
             /**
+             * Appends the val to the array denoted by path.
+             * If the path is not present, then an array is created and then the value is created
+             *
+             * If the path is present but it is not of type null or undefined,
+             * then nothing gets appended
+             *
+             *
+             * @param path
+             * @param val
+             */
+            push: function(path,val,create) {
+                var traversed;
+                var traversedAlmost = traverseAlmost(obj,path);
+                if ( traversedAlmost && traversedAlmost.traversed ) {
+                    traversed = traversedAlmost.traversed[traversedAlmost.childPath];
+                    if ( !traversed && nullOrUndefined(traversed) ) {
+                        traversedAlmost.traversed[traversedAlmost.childPath] = [];
+                    }
+                    if ( Array.isArray(traversedAlmost.traversed[traversedAlmost.childPath]) )  {
+                        traversedAlmost.traversed[traversedAlmost.childPath].push(val);
+                    }
+                }
+
+            },
+
+            /**
+             * Create the specified path as empty objects if not exists
+             *
+             */
+            create : function(path) {
+                var walked = obj;
+                var stopIt = false;
+                path.split('.').forEach(function(p) {
+                    if ( !stopIt ) { //traverse until its ok
+                        if (!walked[p]) {
+                            walked[p] = {};
+                        }
+                        walked = walked[p];
+                        if (Array.isArray(walked) || typeof walked !== 'object' ) {
+                            stopIt = true;
+                        }
+                        if (!walked) {
+                            walked = walked[p] = {};
+                        }
+                    }
+
+                });
+             },
+
+            /**
              * Remove this path
              *
              * @param path
              */
             delete: function(path) {
                 var traversedAlmost = traverseAlmost(obj,path);
-                if ( traversedAlmost ) {
+                if ( traversedAlmost && traversedAlmost.traversed ) {
                     delete traversedAlmost.traversed[traversedAlmost.childPath];
                 } else if ( obj ) {
                     delete obj[path];

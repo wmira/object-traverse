@@ -134,5 +134,35 @@ describe('object traverse tests', function(){
         assert.equal(traverse(deleteObj).get('nested.x'),undefined);
     });
 
+    var pushTest = {
+        x : 'y',
+        nested: {
+            x : 'y',
+            z : {
+            }
+        }
+    };
 
+    it ( 'should push properly' ,function() {
+
+        traverse(pushTest).push('nested.z.k',1);
+        assert.equal(traverse(pushTest).isArray('nested.z.k'),true);
+        traverse(pushTest).push('nested.z.k',2);
+        assert.equal(traverse(pushTest).get('nested.z.k').length,2);
+        traverse(pushTest).push('nested.l.m.n',2);
+        assert.equal(traverse(pushTest).has('nested.l.m.n'),false);
+
+        //ensure it won't replace a non array that is defined
+        traverse(pushTest).push('nested.x',1);
+        assert.equal(traverse(pushTest).get('nested.x'),'y');
+    });
+    var createTest = {
+        x :  { y : [] }
+    };
+    it ( 'should create properly', function() {
+        traverse(createTest).create('x.y.z');
+        assert.equal(traverse(createTest).has('x.y.z'),false); //it will not overwrite an array
+        traverse(createTest).create('x.b.z');
+        assert.equal(traverse(createTest).has('x.b.z'),true);
+    });
 });

@@ -41,15 +41,15 @@ var graph = {
    
 };
 //get a value
-traverse(graph).get('field/deep');
+traverse(graph).get('field.deep');
 //get with a default
-traverse(graph).get('field/deep','default return val if not found'); 
+traverse(graph).get('field.deep','default return val if not found'); 
 
 //check if something is defined
-traverse(graph).has('field/deep/missing');
+traverse(graph).has('field.deep.missing');
 
 //sets a value
-traverse(graph).set('field/deep/z',5);
+traverse(graph).set('field.deep.z',5);
    
 //helpers
 traverse(graph).isArray('field2');
@@ -58,10 +58,10 @@ traverse(graph).isObject('field2');
 traverse(graph).isNumber('field2');
           
 //exec
-traverse(graph).exec('deepFunc/someFunc','arg');         
+traverse(graph).exec('deepFunc.someFunc','arg');         
 
 //delete
-traverse(graph).delete('field/deep/x');
+traverse(graph).delete('field.deep.x');
 
 //push - add vall to the array, will create if it doesn't exists
 traverse(graph).push('a.b.c',val);
